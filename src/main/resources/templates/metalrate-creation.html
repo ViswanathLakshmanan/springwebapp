@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <meta charset="UTF-8" />
+     <script type="text/javascript" src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+        <title th:text="#{app.title}"> Title </title>
+        <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    </head>
+	<body>
+		<h1 th:text="#{app.create-metalrate}">Create</h1>
+		 <div class="container">
+		<div class="card">
+		
+		<div class="card-block">
+	    <form action="#" th:action="@{/create-metalrate}" th:object="${metalRate}" method="POST">
+	      <table  class="table">
+	      <tbody>
+		<!-- <tr><td th:text="#{metalrate.metalcode}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{metalCode}" />
+	    	    </td>
+	    	</tr> -->
+	    	<tr><td th:text="#{metalrate.metalname}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{metalName}" />
+
+	    	    </td>
+	    	</tr>
+	    	<tr><td th:text="#{metalrate.metalshortcode}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{metalShortcode}" />
+
+	    	    </td>
+	    	</tr>
+		
+		<tr><td th:text="#{metalrate.purity}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{purity}" />
+
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{metalrate.metalunit}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{metalUnit}" />
+
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{metalrate.metalrate}"></td>
+	    	    <td>
+	    	      <input type="text" th:field="*{rate}" />
+
+	    	    </td>
+	    	</tr>
+	    	    		    	
+	        <tr><td colspan="2">
+	              <input type="submit" th:value="#{form.submit}"/> 
+	              <input type="reset" th:value="#{form.reset}"/>
+	              <div th:if="${#fields.hasErrors('*')}" th:text="#{error.metalrate.info}" th:class="'error'">errors</div>
+	            </td>
+	        </tr>
+	        </tbody>
+	      </table>  
+	    </form>
+	    </div>
+	    </div>
+	    </div>
+	</body>
+</html>

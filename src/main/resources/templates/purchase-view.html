@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+  <script type="text/javascript" src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+      <title th:text="#{app.title}"> Title </title>
+     <!--  <link rel="stylesheet" th:href="@{/css/styles.css}"/> -->
+</head>
+<body>
+   <h1 th:text="#{app.purchase-details}">Details</h1>
+   <div class="container">
+		<div class="card">
+		
+		<div class="card-block">
+		
+    <table class="table table-hover">
+    <thead>
+    <tr>
+          <th th:text="#{purchase.purchaseno}"/></th>                        
+	<th th:text="#{purchase.purchasebillno}"/></th>                    
+	<th th:text="#{purchase.purchasedate}"/></th>                      
+	<th th:text="#{purchase.dealername}"/></th>                        
+	<th th:text="#{purchase.dealercompany}"/></th>                     
+	<th th:text="#{purchase.product}"/></th>                       
+	<th th:text="#{purchase.piece}"/></th>                             
+	<th th:text="#{purchase.grosswt}"/></th>                           
+	<th th:text="#{purchase.netwt}"/></th>                             
+	<th th:text="#{purchase.lesswt}"/></th>                            
+	<th th:text="#{purchase.rate}"/></th>                              
+	<th th:text="#{purchase.wastage}"/></th>                           
+	<th th:text="#{purchase.makingcharge}"/></th>                      
+	<th th:text="#{purchase.stoneno}"/></th>                           
+	<th th:text="#{purchase.stonewt}"/></th>                           
+	<th th:text="#{purchase.stoneamt}"/></th>                          
+	<th th:text="#{purchase.diamondno}"/></th>                         
+	<th th:text="#{purchase.diamondwt}"/></th>                         
+	<th th:text="#{purchase.diamondamt}"/></th>                        
+	<th th:text="#{purchase.grossornet}"/></th>                        
+	<th th:text="#{purchase.purchasetaxpercent}"/></th>                
+	<th th:text="#{purchase.discount}"/></th>                          
+	<th th:text="#{purchase.roundofamount}"/></th>                     
+	<th th:text="#{purchase.othercharge}"/></th>                       
+	<th th:text="#{purchase.amount}"/></th>                            
+	<th th:text="#{purchase.purchasetype}"/></th>                      
+	<th th:text="#{purchase.billrefno}"/></th>                         
+	<th th:text="#{purchase.billrefdate}"/></th>                       
+	<th th:text="#{purchase.billstatus}"/></th>                                              
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="purchase : ${allPurchases}">
+	      <td th:text="${purchase.purchaseNo}"></td>                        
+	<td th:text="${purchase.purchaseBillNo}"></td>                    
+	<!-- <td th:text="${purchase.purchaseDate}"></td>                      
+	<td th:text="${purchase.dealerName}"></td>                        
+	<td th:text="${purchase.dealerCompany}"></td>                     
+	<td th:text="${purchase.product.productName}"></td>                       
+	<td th:text="${purchase.piece}"></td>                             
+	<td th:text="${purchase.grossWt}"></td>                           
+	<td th:text="${purchase.netWt}"></td>                             
+	<td th:text="${purchase.lessWt}"></td>                            
+	<td th:text="${purchase.rate}"></td>                              
+	<td th:text="${purchase.wastage}"></td>                           
+	<td th:text="${purchase.makingCharge}"></td>                      
+	<td th:text="${purchase.stoneNo}"></td>                           
+	<td th:text="${purchase.stoneWt}"></td>                           
+	<td th:text="${purchase.stoneAmt}"></td>                          
+	<td th:text="${purchase.diamondNo}"></td>                         
+	<td th:text="${purchase.diamondWt}"></td>                         
+	<td th:text="${purchase.diamondAmt}"></td>                        
+	<td th:text="${purchase.grossOrNet}"></td>                        
+	<td th:text="${purchase.purchaseTaxPercent}"></td>                
+	<td th:text="${purchase.discount}"></td>                          
+	<td th:text="${purchase.roundOfAmount}"></td>                     
+	<td th:text="${purchase.otherCharge}"></td>                       
+	<td th:text="${purchase.amount}"></td>                            
+	<td th:text="${purchase.purchaseType}"></td>                      
+	<td th:text="${purchase.billRefno}"></td>                         
+	<td th:text="${purchase.billRefDate}"></td>                       
+	<td th:text="${purchase.billStatus}"></td>    	   -->		  
+	    </tr>	
+	    </tbody>
+	</table>
+	</hr>
+	<ul class="nav nav-pills">
+	<li class="nav-item"
+	 th:each= "i : ${#numbers.sequence(0,allPurchases.totalPages-1)}">
+		<a th:href="@{/app/(page=${i})}" th:text="${i}" class="nav-link"
+		th:classappend="${currentPage}==${i}?'active':''"></a> 
+	 </li>
+		
+	</ul>
+	
+	</div>
+		
+		</div>
+	
+	</div>
+	<a href="#" th:href="@{/app/create-purchase}" th:text="#{purchase.add-more-purchase}">Add Purchase</a>
+</body>
+</html>   

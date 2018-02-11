@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head>
+    <meta charset="UTF-8" />
+     <script type="text/javascript" src="/webjars/jquery/2.2.3/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+<link rel="stylesheet" th:href="@{/css/style.css}"/>
+<script type="text/javascript" th:src="@{/js/main.js}" src="../static/js/main.js"></script>
+       <title th:text="#{app.title}"> Title </title> 
+    </head>
+	<body>
+		 <h1 th:text="#{app.create-purchase}">Create</h1>
+		 <div class="container"> 
+		<div class="card">
+		
+		<div class="card-block">
+		
+		    <div class="table-container">
+    	<div class="table-wrapper">
+        <table>
+            <thead>
+                <tr>
+					<th >Edit</th>    
+					<th >Sno</th>                  
+					<th th:text="#{purchase.dealername}"/></th>                        
+					<th th:text="#{purchase.dealercompany}"/></th>                     
+					<th th:text="#{purchase.product}"/></th>                       
+					<th th:text="#{purchase.piece}"/></th>                             
+					<th th:text="#{purchase.grosswt}"/></th>                           
+					<th th:text="#{purchase.netwt}"/></th>                             
+					<th th:text="#{purchase.lesswt}"/></th>                            
+					<th th:text="#{purchase.rate}"/></th>                              
+					<th th:text="#{purchase.wastage}"/></th>                           
+					<th th:text="#{purchase.makingcharge}"/></th>                                           
+					<th th:text="#{purchase.grossornet}"/></th>                        
+					<th th:text="#{purchase.purchasetaxpercent}"/></th>                
+					<th th:text="#{purchase.discount}"/></th>                          
+					<th th:text="#{purchase.roundofamount}"/></th>                     
+					<th th:text="#{purchase.othercharge}"/></th>                       
+					<th th:text="#{purchase.amount}"/></th>                            
+					<th th:text="#{purchase.purchasetype}"/></th>                      
+					<th th:text="#{purchase.billrefno}"/></th>                         
+					<th th:text="#{purchase.billrefdate}"/></th>                       
+					<th th:text="#{purchase.billstatus}"/></th>      
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+        
+        </div>
+        <div class="button-row">
+        	<a href="#" class="button float-right popup-action" data-id="table-form">Add New row</a>
+        </div>
+    </div>
+    
+    <!-- DIV Submit customer  -->
+		<!-- SUBMIT Customer Button to Server -->
+		<button id="postCustomersBtn" style="margin-bottom:10px" type="submit" class="btn btn-default">Post Customers</button>
+		
+		<!-- Message result from server -->
+		<div id="postResultDiv" style="margin:10px 0px 10px 0px;">
+		</div>
+		
+		<div class="popup-wrapper">
+	    <div class="popup-blk">
+	        <div class="popup-middle-blk">
+	          <form id="purchaseForm">
+	            <div id="table-form" class="popup-content">
+	                <div class="popup-close"><img src="/images/close-black.png" alt=""></div>
+	                <h4>Add Your table details</h4>
+	            	<div class="popup-scroll-content">
+	            	
+	            	
+              <div class="form-row">
+	    	 
+	    	<div class="form-section">	    	    
+	    	       <input type="text" id="dealername" class="text-box" th:attr="placeholder=#{purchase.dealername}"/>
+	    	 </div>
+	    	<div class="form-section">	    	    
+	    	       <input type="text" id ="dealercompany" class="text-box" th:attr="placeholder=#{purchase.dealercompany}"/>
+	    	</div>
+	    	<div class="form-section">	
+	    	<select >
+	    	          <option th:each="product : ${allProducts}" th:value="${product.productCode}" th:text="${product.productName}">Product</option>
+	    	       </select>
+	    	</div>      
+	    	
+				
+	    	<div class="form-section">    
+	    	       <input type="text" id="piece" class="text-box" th:attr="placeholder=#{purchase.piece}"/>
+	    	</div>    
+	    	
+		
+	    	<div class="form-section">    
+	    	       <input type="text" id="grosswt" class="text-box calculatelesswt" th:attr="placeholder=#{purchase.grosswt}"/>
+	    	</div>    
+	    	
+		
+	    	<div class="form-section">    
+	    	       <input type="text" id="netwt" class="text-box calculatelesswt" th:attr="placeholder=#{purchase.netwt}"/>
+	    	</div>  
+	    	
+		
+	    	<div class="form-section">    
+	    	       <input type="text" id="lesswt" class="text-box" th:attr="placeholder=#{purchase.lesswt}" readonly="readonly"/>
+	    	</div>       
+	    	    
+	    	<div class="form-section">	    	    
+	    	       <input type="text" id="rate" class="text-box calculateamount" th:attr="placeholder=#{purchase.rate}" />	    	     
+	    	    </div>
+	    	<div class="form-section">		 	    
+	    	       <input type="text" id="wastage" class="text-box calculateamount" th:attr="placeholder=#{purchase.wastage}"/>
+	    	   </div>
+		<div class="form-section">    	    
+	    	       <input type="text" id="mc" class="text-box calculateamount" th:attr="placeholder=#{purchase.makingcharge}"/>
+		</div>
+
+		<div class="form-section">	    	    
+	    	       <input type="text" id="purchasetax" class="text-box calculateamount" th:attr="placeholder=#{purchase.purchasetaxpercent}"/>
+		</div>	    	    
+		<div class="form-section">    	    
+	    	       <input type="text" id="discount" class="text-box calculateamount" th:attr="placeholder=#{purchase.discount}"/>
+
+		</div>	    	    
+	    	
+		<div class="form-section">    	    
+	    	       <input type="text" id="otherCharge" class="text-box calculateamount" th:attr="placeholder=#{purchase.othercharge}"/>
+		</div>
+	    
+	    <div class="form-section">	    	    
+	    	       <input type="text" id="roundofamt" class="text-box" th:attr="placeholder=#{purchase.roundofamount}" readonly="readonly"/>
+		</div>	    
+	    	
+		<div class="form-section">	    	    
+	    	       <input type="text" id="amount" class="text-box" th:attr="placeholder=#{purchase.amount}" readonly="readonly"/>
+	    	</div>    
+	    
+	    	
+		<div class="form-section">	    	    
+	    	       <input type="text" id="purchasetype" class="text-box" th:attr="placeholder=#{purchase.purchasetype}"/>
+	    	    
+	    	</div>
+
+		<div class="form-section">			    	    
+	    	       <input type="text" id="billrefno" class="text-box" th:attr="placeholder=#{purchase.billrefno}"/>
+		</div>	    	    
+	    	
+		
+	    	<div class="form-section">    
+	    	       <input type="text" id="billrefdate" class="text-box" th:attr="placeholder=#{purchase.billrefdate}"/>
+	    	</div>    
+	    	
+		<div class="form-section">	    	    
+	    	       <input type="text" id="billstatus" class="text-box" th:attr="placeholder=#{purchase.billstatus}"/>
+	    	    
+	    	</div>
+	    	<div class="form-section">    
+	    	       <input type="text" id="description" class="text-box" th:attr="placeholder=#{purchase.description}"/>
+		</div> 
+		    <div class="popup-footer">
+						<input type="submit" class="button add-tr-row"  value="submit">
+					</div>
+		
+		</div>
+		</div>
+		</div>
+		      </form>
+	     <!-- <form action="#" th:action="@{/app/create-purchase}" th:object="${purchase}" method="POST">
+	      <table  class="table">
+	      <tbody>
+		<tr><td th:text="#{purchase.purchasebillno}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{purchaseBillNo}" />
+	    	       <label th:if="${#fields.hasErrors('purchaseBillNo')}" th:text="#{error.purchase.purchasebillno}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+
+		<tr><td th:text="#{purchase.purchasedate}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{purchaseDate}" />
+	    	       <label th:if="${#fields.hasErrors('purchaseDate')}" th:text="#{error.purchase.purchasedate}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.dealername}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{dealerName}" />
+	    	       <label th:if="${#fields.hasErrors('dealerName')}" th:text="#{error.purchase.dealername}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.dealercompany}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{dealerCompany}" />
+	    	       <label th:if="${#fields.hasErrors('dealerCompany')}" th:text="#{error.purchase.dealercompany}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.product}"/></td>
+	    	     <td>
+	    	       <select th:field="*{product}">
+	    	          <option th:each="product : ${allProducts}" th:value="${product.productCode}" th:text="${product.productName}">Product</option>
+	    	       </select>
+	    	   </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.piece}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{piece}" />
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.grosswt}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{grossWt}" />	    	     
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.netwt}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{netWt}" />
+	    	  </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.lesswt}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{lessWt}" />
+	    	       
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.rate}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{rate}" />	    	     
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.wastage}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{wastage}" />
+	    	      
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.makingcharge}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{makingCharge}" />
+	    	      
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.stoneno}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{stoneNo}" />
+	    	       
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.stonewt}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{stoneWt}" />
+	    	       
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.stoneamt}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{stoneAmt}" />
+	    	       
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.diamondno}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{diamondNo}" />
+	    	       
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.diamondwt}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{diamondWt}" />
+	    	       
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.diamondamt}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{diamondAmt}" />
+	    	       
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.grossornet}"/></td>
+	    	    <td>
+	    	       <input type="radio" th:field="*{grossOrNet}" value="G"/><label th:text="#{purchase.gorn.gross}"></label>
+	    	       <input type="radio" th:field="*{grossOrNet}" value="N"/><label th:text="#{purchase.gorn.net}"></label>
+	    	       
+	    	   </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.purchasetaxpercent}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{purchaseTaxPercent}" />
+	    	       <label th:if="${#fields.hasErrors('purchaseTaxPercent')}" th:text="#{error.purchase.purchasetaxpercent}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.discount}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{discount}" />
+
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.roundofamount}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{roundOfAmount}" />
+
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.othercharge}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{otherCharge}" />
+
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.amount}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{amount}" />	    	      
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.purchasetype}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{purchaseType}" />
+	    	       <label th:if="${#fields.hasErrors('purchaseType')}" th:text="#{error.user.id}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+
+		<tr><td th:text="#{purchase.billrefno}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{billRefno}" />
+	    	       <label th:if="${#fields.hasErrors('billRefno')}" th:text="#{error.purchase.billrefno}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.billrefdate}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{billRefDate}" />
+	    	       <label th:if="${#fields.hasErrors('billRefDate')}" th:text="#{error.purchase.billrefdate}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr>
+		<tr><td th:text="#{purchase.billstatus}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{billStatus}" />
+	    	       <label th:if="${#fields.hasErrors('billStatus')}" th:text="#{error.user.id}" th:class="'error'">Id Error</label>
+	    	    </td>
+	    	</tr><tr><td th:text="#{purchase.description}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{description}" />
+	    	      
+	    	    </td>
+	    	</tr>    		
+	        <tr><td colspan="2">
+	              <input type="submit" th:value="#{form.submit}"/> 
+	              <input type="reset" th:value="#{form.reset}"/>
+	            </td>
+	        </tr>
+	        </tbody>
+	      </table>  
+	    </form> -->
+	    </div>
+	    </div> 
+	    </div>
+	    </div>
+	    </div>
+	    </div>
+	</body>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="js/main.js"></script>
+</html>

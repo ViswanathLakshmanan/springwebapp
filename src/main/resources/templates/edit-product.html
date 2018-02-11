@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+     <script type="text/javascript" src="/webjars/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript" src="/webjars/bootstrap/4.0.0-alpha.2/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="/webjars/bootstrap/4.0.0-alpha.2/css/bootstrap.min.css" />
+        <title th:text="#{app.title}"> Title </title>
+        <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    </head>
+	<body>
+		<h1 th:text="#{app.edit-product}">Create</h1>
+		 <div class="container">
+		<div class="card">
+		
+		<div class="card-block">
+		
+	    <form action="#" th:action="@{/product/edit-product}" th:object="${product}" method="POST">
+	        <table  class="table">
+	      <tbody>
+	     
+	    	<tr><td th:text="#{product.productname}"/></td>
+	    	    <td>
+	    	    <input type="hidden" th:field="*{productCode}" />
+	    	       <input type="text" th:field="*{productName}" />
+	    	  </td>
+	    	</tr>
+	    	<tr><td th:text="#{product.tag}"></td>
+	    	   <td>
+	    	       <input type="radio" th:field="*{taggedYorN}" value="Y"/><label th:text="#{product.tag.yes}"></label>
+	    	       <input type="radio" th:field="*{taggedYorN}" value="N"/><label th:text="#{product.tag.no}"></label>
+	    	       
+	    	   </td>
+	    	</tr>
+		
+		<tr><td th:text="#{product.weightorrate}"></td>
+	    	   <td>
+	    	       <input type="radio" th:field="*{weightOrRate}" value="W"/><label th:text="#{product.wtorrt.weight}"></label>
+	    	       <input type="radio" th:field="*{weightOrRate}" value="R"/><label th:text="#{product.wtorrt.rate}"></label>
+	    	       
+	    	   </td>
+	    	</tr>
+		<tr><td th:text="#{product.shortname}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{shortName}" />
+	    	  </td>
+	    	</tr>
+		<tr><td th:text="#{product.wastage}"/></td>
+	    	    <td>
+	    	       <input type="text" th:field="*{wastage}" />
+	    	  </td>
+	    	</tr>
+	    		
+	    	<tr><td th:text="#{product.metal}"></td>
+	    	   <td>
+	    	       <select th:field="*{metal}">
+	    	          <option th:each="metal : ${allMetals}" th:value="${metal.metalId}" th:text="${metal.metalName}"></option>
+	    	       </select>
+	    	   </td>
+	    	</tr>
+			    		    	
+	        <tr><td colspan="2">
+	              <input type="submit" th:value="#{form.submit}"/> 
+	              <input type="reset" th:value="#{form.reset}"/>
+	               <div th:if="${#fields.hasErrors('*')}" th:text="#{error.product.info}" th:class="'error'">errors</div>
+	            </td>
+	        </tr>
+	        </tbody>
+	      </table>  
+	    </form>
+	    </div>
+	    </div>
+	    </div>
+	</body>
+</html>
