@@ -123,7 +123,6 @@ function ajaxPost(){
 		contentType : "application/json",
 		accept: 'text/plain',
 		url : "http://localhost:8083/app/purchase/save",
-		alert(listPurchase);
 		data : JSON.stringify(listPurchase),
 		dataType: 'text',
 		success : function(result) {

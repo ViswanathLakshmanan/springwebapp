@@ -1,6 +1,5 @@
 package com.retail.app.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -16,9 +15,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotBlank;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
@@ -72,14 +71,15 @@ public class Purchase {
 	//Autocalculated field
 	private double roundOfAmount;     
 	//Cumulative value stone/diamont or othermetal
-	private double otherCharge;                                                     
+	private double otherCharge;    
 	private double amount;        
 	
 	private String purchaseType;
 	@NotNull
 	private String billRefno;
+	
 	@JsonSerialize(using = LocalDateTimeSerializer.class)
-	@JsonFormat(pattern = "dd-MM-yyyy")
+	@JsonDeserialize(using = LocalDateTimeDeserializer.class)
 	private LocalDateTime billRefDate;                                                     
 	private String billStatus;                                                      
 	private String description; 
